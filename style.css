@@ -105,6 +105,8 @@ header {
   padding: 0;
 }
 .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.theme-toggle:active { transform: scale(.94); }
 
 main {
   max-width: 880px;
@@ -280,7 +282,8 @@ details ol { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-siz
 details li { margin: 6px 0; }
 
 @media (max-width: 560px) {
-  header { padding: 12px 14px; }
+  header { padding: 12px 14px; gap: 10px; }
+  .theme-toggle { width: 44px; height: 44px; }
   .brand h1 { font-size: 19px; }
   main { padding: 14px 10px 140px; }
   .card { padding: 14px; }

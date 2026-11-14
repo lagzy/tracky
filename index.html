@@ -5,14 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tracky — PU-Lektion festhalten</title>
 <meta name="description" content="Tracky hält fest, was in der PU-Lektion gelaufen ist, und lädt einen Rapport-Export als .zip herunter.">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=3">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 <script>
   /* Thema vor dem ersten Zeichnen setzen, damit nichts hell aufblitzt */
   (function () {
     var t = null;
     try { t = localStorage.getItem("tracky.theme"); } catch (e) {}
-    if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var mq = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+    if (!t) t = (mq && mq.matches) ? "dark" : "light";
     document.documentElement.setAttribute("data-theme", t);
   })();
 </script>
@@ -106,7 +107,7 @@
 
 <div class="toast" id="toast"></div>
 
-<script src="zip.js"></script>
-<script src="app.js"></script>
+<script src="zip.js?v=3"></script>
+<script src="app.js?v=3"></script>
 </body>
 </html>
