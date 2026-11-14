@@ -4,27 +4,25 @@
   "use strict";
 
   var DB_NAME = "tracky", DB_VERSION = 1, KV = "kv", BILDER = "bilder";
-  var MAX_KANTE = 1600, JPEG_Q = 0.82, SAETZE_MIN = 4;
+  var MAX_KANTE = 1600, JPEG_Q = 0.82;
   var LEKTIONEN = 3;
 
   var state = {
     person: null,
     datum: heuteISO(),
     start: "",
-    infos: "",
     lektionen: [],
     positives: "",
     negatives: "",
     gelernt: "",
     naechste_woche: ""
   };
-  for (var i = 0; i < LEKTIONEN; i++) state.lektionen.push({ text: "", bilder: [] });
+  for (var i = 0; i < LEKTIONEN; i++) state.lektionen.push({ notizen: "", bilder: [] });
 
   var el = {
     people: document.getElementById("people"),
     datum: document.getElementById("datum"),
     start: document.getElementById("start"),
-    infos: document.getElementById("infos"),
     lektionen: document.getElementById("lektionen"),
     positives: document.getElementById("positives"),
     negatives: document.getElementById("negatives"),
@@ -166,9 +164,9 @@
     var thumbs = box.querySelector(".thumbs");
     var zaehler = box.querySelector(".count");
 
-    var n = saetze(textarea.value);
-    zaehler.textContent = n + (n === 1 ? " Satz" : " Sätze");
-    zaehler.className = "count" + (n >= SAETZE_MIN ? " ok" : "");
+    var notiert = (textarea.value || "").trim().length > 0;
+    zaehler.textContent = notiert ? "notiert" : "leer";
+    zaehler.className = "count" + (notiert ? " ok" : "");
 
     thumbs.innerHTML = "";
     state.lektionen[li].bilder.forEach(function (b, idx) {
@@ -203,22 +201,22 @@
         h.id = "lek" + li;
         h.innerHTML =
           '<div class="lesson-head"><h3>Lektion ' + (li + 1) + '</h3>' +
-          '<span class="count">0 Sätze</span></div>' +
-          '<textarea rows="5" placeholder="' +
-          ["Frau Stalder hat wie immer die Infos gegeben. Danach habe ich …",
-           "Nach der Pause haben wir …",
-           "Gegen Ende der Lektion haben wir …"][li] + '"></textarea>' +
+          '<span class="count">leer</span></div>' +
+          '<textarea rows="2" placeholder="' +
+          ["Firmware weitergebracht, neuer Spielmodus angefangen",
+           "Abstandston getestet, Werte notiert",
+           "Töne für Zombie abgestimmt"][li] + '"></textarea>' +
           '<label class="drop">📷 Foto hinzufügen oder hierher ziehen<input type="file" accept="image/*" multiple></label>' +
           '<div class="thumbs"></div>';
 
         var textarea = h.querySelector("textarea");
-        textarea.value = state.lektionen[li].text;
+        textarea.value = state.lektionen[li].notizen;
         textarea.addEventListener("input", function () {
-          state.lektionen[li].text = textarea.value;
-          var n = saetze(textarea.value);
+          state.lektionen[li].notizen = textarea.value;
           var z = h.querySelector(".count");
-          z.textContent = n + (n === 1 ? " Satz" : " Sätze");
-          z.className = "count" + (n >= SAETZE_MIN ? " ok" : "");
+          var notiert = textarea.value.trim().length > 0;
+          z.textContent = notiert ? "notiert" : "leer";
+          z.className = "count" + (notiert ? " ok" : "");
           speichern();
           pruefe();
         });
@@ -257,14 +255,11 @@
   function bilanz() {
     var probleme = [];
     if (!state.person) probleme.push("Person wählen");
-    var mitText = state.lektionen.filter(function (l) { return l.text.trim(); }).length;
-    if (!mitText) probleme.push("mindestens eine Lektion beschreiben");
+    var mitNotiz = state.lektionen.filter(function (l) { return l.notizen.trim(); }).length;
+    if (!mitNotiz) probleme.push("mindestens eine Lektion notieren");
     state.lektionen.forEach(function (l, idx) {
-      var n = saetze(l.text);
-      if (l.text.trim() && n < SAETZE_MIN) probleme.push("Lektion " + (idx + 1) + " hat nur " + n + " Sätze");
-      if (l.text.trim() && !l.bilder.length) probleme.push("Lektion " + (idx + 1) + " hat kein Foto");
+      if (l.notizen.trim() && !l.bilder.length) probleme.push("Lektion " + (idx + 1) + " hat kein Foto");
     });
-    if (!zeilen(state.infos).length) probleme.push("Infos von Frau Stalder fehlen");
     return probleme;
   }
 
@@ -295,7 +290,7 @@
 
   function baueExport() {
     var lektionen = state.lektionen.map(function (l) {
-      return { text: l.text.trim(), bilder: [] };
+      return { notizen: l.notizen.trim(), bilder: [] };
     });
     var files = [];
     var aufgaben = [];
@@ -315,13 +310,12 @@
 
     return Promise.all(aufgaben).then(function () {
       var json = {
-        format: "tracky/1",
+        format: "tracky/2",
         person: state.person,
         datum: state.datum,
         lektion_start: state.start || null,
         erzeugt: new Date().toISOString(),
-        infos: zeilen(state.infos),
-        lektionen: lektionen.filter(function (l) { return l.text || l.bilder.length; }),
+        lektionen: lektionen.filter(function (l) { return l.notizen || l.bilder.length; }),
         positives: zeilen(state.positives),
         negatives: zeilen(state.negatives),
         gelernt: zeilen(state.gelernt),
@@ -373,7 +367,6 @@
       b.addEventListener("click", function () { setzePerson(b.dataset.person); });
     });
 
-    bindeFeld(el.infos, "infos");
     bindeFeld(el.positives, "positives");
     bindeFeld(el.negatives, "negatives");
     bindeFeld(el.gelernt, "gelernt");
@@ -398,12 +391,11 @@
         if (k !== "lektionen") state[k] = gespeichert[k];
       });
       gespeichert.lektionen && gespeichert.lektionen.forEach(function (l, x) {
-        if (state.lektionen[x]) state.lektionen[x].text = l.text || "";
+        if (state.lektionen[x]) state.lektionen[x].notizen = l.notizen || l.text || "";
       });
 
       el.datum.value = state.datum;
       el.start.value = state.start || "";
-      el.infos.value = state.infos || "";
       el.positives.value = state.positives || "";
       el.negatives.value = state.negatives || "";
       el.gelernt.value = state.gelernt || "";
@@ -413,7 +405,7 @@
       });
       for (var li = 0; li < LEKTIONEN; li++) {
         var box = document.getElementById("lek" + li);
-        box.querySelector("textarea").value = state.lektionen[li].text;
+        box.querySelector("textarea").value = state.lektionen[li].notizen;
         zeichneLektion(li);
       }
       meldeStatus("Entwurf geladen", true);

@@ -44,44 +44,44 @@
     </div>
   </section>
 
-  <section class="card">
-    <h2><span class="nr">2</span> Infos von Frau Stalder</h2>
-    <p class="hint">Rohnotizen genügen — eine Info pro Zeile, Stichworte sind okay. Die Sätze werden später
-      im Stil der Person neu formuliert und neu geordnet.</p>
-    <textarea id="infos" rows="6" placeholder="Abmeldung bis Freitag 12 Uhr
-Fotos für Dokumappe
-MSG-Notenblatt zeigt offene Punkte"></textarea>
-  </section>
-
   <section class="card" id="lektionen">
-    <h2><span class="nr">3</span> Die drei Lektionen</h2>
-    <p class="hint">Was wurde gemacht, mit Zahlen? Frau Stalder verlangt <strong>mindestens 4 Sätze</strong> pro Lektion.
-      Zu jeder Lektion gehört ein eigenes Foto vom Arbeitsprozess — Handyfoto, kein Bildschirmfoto.</p>
+    <h2><span class="nr">2</span> Die drei Lektionen</h2>
+    <p class="hint">Nur Stichpunkte: <em>«Firmware weitergebracht, neuer Spielmodus angefangen»</em>.
+      Den Rapporttext schreibe ich daraus — du musst keine Sätze formulieren.
+      Ein Foto pro Lektion genügt (Handyfoto, kein Bildschirmfoto).</p>
     <!-- Lektionen werden per JS eingefügt -->
   </section>
 
   <section class="card">
-    <h2><span class="nr">4</span> Auswertung</h2>
-    <p class="hint">Kurze Stichpunkte, eine Zeile pro Punkt. «Gelernt» ist freiwillig.</p>
+    <h2><span class="nr">3</span> Auswertung <span class="frei">optional</span></h2>
+    <p class="hint">Leer lassen ist in Ordnung — dann schreibe ich Positives, Negatives und «gelernt»
+      aus den Lektionen. Eigene Stichpunkte haben Vorrang.</p>
 
-    <label for="positives">Positives</label>
-    <textarea id="positives" rows="3" placeholder="Firmware läuft auf beiden Testgeräten"></textarea>
+    <div class="row">
+      <div>
+        <label for="positives">Positives</label>
+        <textarea id="positives" rows="2" placeholder="Firmware läuft auf beiden Geräten"></textarea>
+      </div>
+      <div>
+        <label for="negatives">Negatives</label>
+        <textarea id="negatives" rows="2" placeholder="Zu wenig Zeit für das Gehäuse"></textarea>
+      </div>
+    </div>
 
-    <label for="negatives">Negatives</label>
-    <textarea id="negatives" rows="3" placeholder="Zu wenig Zeit für das Gehäuse"></textarea>
-
-    <label for="gelernt">Das habe ich gelernt (optional)</label>
-    <textarea id="gelernt" rows="3" placeholder="ESP-NOW braucht keine Verbindung, um Geräte zu finden"></textarea>
+    <label for="gelernt">Das habe ich gelernt</label>
+    <textarea id="gelernt" rows="2" placeholder="ESP-NOW braucht keine WLAN-Verbindung"></textarea>
 
     <label for="naechste_woche">Meine Arbeit auf die nächste Woche</label>
-    <textarea id="naechste_woche" rows="3" placeholder="Gehäuse v2 drucken und Fit-Test machen"></textarea>
+    <textarea id="naechste_woche" rows="2" placeholder="Gehäuse v2 drucken und Fit-Test machen"></textarea>
 
     <details>
       <summary>Was passiert nach dem Download?</summary>
       <ol>
         <li>Die <code>.zip</code>-Datei im Discord an Hermes schicken (oder in den Projektordner legen).</li>
-        <li>Der Rapport wird gebaut: eigene Vorlage, eigener Stil, Infos neu formuliert.</li>
-        <li>Du bekommst den fertigen <code>.docx</code> zurück — prüfen, dann via Teams an Frau Stalder.</li>
+        <li>Die Infos von Frau Stalder kommen aus der Lektionsaufnahme — Aufnahme dazuschicken,
+          falls sie noch nicht transkribiert ist.</li>
+        <li>Hermes schreibt Lektionsabsätze, Auswertung und Rapport und schickt den <code>.docx</code>
+          zurück. Prüfen, dann via Teams an Frau Stalder.</li>
       </ol>
     </details>
   </section>

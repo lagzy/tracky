@@ -84,6 +84,19 @@ main {
 
 .hint { color: var(--muted); font-size: 13.5px; margin: 0 0 12px; }
 
+.frei {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  color: var(--muted);
+  background: #f1f4f3;
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.lesson textarea { min-height: 62px; }
+
 label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin: 12px 0 5px; }
 
 input[type="date"], input[type="time"], textarea {
