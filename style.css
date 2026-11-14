@@ -1,0 +1,214 @@
+:root {
+  --bg: #f4f6f5;
+  --card: #ffffff;
+  --ink: #14201d;
+  --muted: #64756f;
+  --line: #e2e8e5;
+  --accent: #0f766e;
+  --accent-soft: #e6f4f1;
+  --warn: #b45309;
+  --warn-soft: #fef3e2;
+  --ok: #15803d;
+  --ok-soft: #e8f7ec;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(16, 40, 36, .06), 0 8px 24px rgba(16, 40, 36, .06);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+  padding: 14px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand h1 { margin: 0; font-size: 22px; letter-spacing: -.4px; }
+.brand .tag { color: var(--muted); font-size: 13px; }
+
+.spacer { flex: 1; }
+
+.status {
+  font-size: 13px;
+  color: var(--muted);
+  min-height: 18px;
+}
+.status.saved { color: var(--ok); }
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 20px 16px 120px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 18px 20px;
+  margin: 0 0 16px;
+}
+
+.card > h2 {
+  margin: 0 0 4px;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.card > h2 .nr {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 8px;
+  font-size: 13px;
+  padding: 2px 8px;
+  font-weight: 700;
+}
+
+.hint { color: var(--muted); font-size: 13.5px; margin: 0 0 12px; }
+
+label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin: 12px 0 5px; }
+
+input[type="date"], input[type="time"], textarea {
+  width: 100%;
+  font: inherit;
+  color: var(--ink);
+  background: #fbfcfc;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 11px 12px;
+  outline: none;
+}
+input[type="date"]:focus, input[type="time"]:focus, textarea:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+textarea { resize: vertical; min-height: 96px; }
+
+.row { display: flex; gap: 12px; flex-wrap: wrap; }
+.row > div { flex: 1 1 200px; }
+
+.people { display: flex; gap: 10px; flex-wrap: wrap; margin: 6px 0 4px; }
+.person {
+  flex: 1 1 200px;
+  text-align: left;
+  background: #fbfcfc;
+  border: 1.5px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  cursor: pointer;
+  font: inherit;
+  color: var(--ink);
+  transition: .12s;
+}
+.person strong { display: block; font-size: 15px; }
+.person span { color: var(--muted); font-size: 12.5px; }
+.person:hover { border-color: #c9d6d2; }
+.person[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, .08);
+}
+
+.lesson { border-top: 1px dashed var(--line); margin-top: 18px; padding-top: 16px; }
+.lesson:first-of-type { border-top: 0; margin-top: 6px; padding-top: 0; }
+
+.lesson-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.lesson-head h3 { margin: 0; font-size: 14.5px; color: var(--accent); letter-spacing: .3px; text-transform: uppercase; }
+
+.count { font-size: 12.5px; font-weight: 600; padding: 3px 9px; border-radius: 999px; background: var(--warn-soft); color: var(--warn); }
+.count.ok { background: var(--ok-soft); color: var(--ok); }
+
+.drop {
+  margin-top: 10px;
+  border: 1.5px dashed #cbd8d4;
+  border-radius: 12px;
+  padding: 14px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13.5px;
+  cursor: pointer;
+  background: #fbfcfc;
+}
+.drop.over { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.drop input { display: none; }
+
+.thumbs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+.thumb { position: relative; width: 104px; }
+.thumb img { width: 104px; height: 78px; object-fit: cover; border-radius: 8px; border: 1px solid var(--line); display: block; }
+.thumb button {
+  position: absolute; top: -7px; right: -7px;
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--line); background: #fff; color: #b91c1c;
+  cursor: pointer; font-size: 13px; line-height: 1; padding: 0;
+}
+
+.bar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(6px);
+  border-top: 1px solid var(--line);
+  padding: 12px 16px;
+  display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+  z-index: 30;
+}
+.bar .check { flex: 1 1 260px; font-size: 13px; color: var(--muted); }
+.bar .check b { color: var(--warn); }
+
+button.primary {
+  font: inherit; font-weight: 650;
+  background: var(--accent); color: #fff;
+  border: 0; border-radius: 11px;
+  padding: 13px 22px; cursor: pointer;
+  box-shadow: 0 6px 16px rgba(15, 118, 110, .25);
+}
+button.primary:hover { background: #0c625b; }
+button.primary:disabled { background: #b9c6c2; box-shadow: none; cursor: not-allowed; }
+
+button.ghost {
+  font: inherit; font-size: 14px;
+  background: transparent; color: var(--muted);
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: 10px 14px; cursor: pointer;
+}
+button.ghost:hover { color: #b91c1c; border-color: #f0c4c4; }
+
+.toast {
+  position: fixed; left: 50%; transform: translateX(-50%);
+  bottom: 90px; background: var(--ink); color: #fff;
+  padding: 11px 18px; border-radius: 10px; font-size: 14px;
+  opacity: 0; pointer-events: none; transition: .25s; z-index: 40; max-width: 90vw;
+}
+.toast.show { opacity: .96; }
+
+details { margin-top: 14px; }
+summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 600; }
+details ol { margin: 10px 0 0; padding-left: 20px; color: var(--muted); font-size: 14px; }
+details li { margin: 6px 0; }
+
+@media (max-width: 560px) {
+  header { padding: 12px 14px; }
+  .brand h1 { font-size: 19px; }
+  main { padding: 14px 10px 140px; }
+  .card { padding: 14px; }
+  .bar { padding: 10px 12px; }
+  button.primary { width: 100%; }
+}

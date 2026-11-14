@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="de-CH">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tracky — PU-Lektion festhalten</title>
+<meta name="description" content="Tracky hält fest, was in der PU-Lektion gelaufen ist, und lädt einen Rapport-Export als .zip herunter.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>Tracky</h1>
+    <span class="tag">PU · Gruppe 22</span>
+  </div>
+  <div class="spacer"></div>
+  <span class="status" id="status"></span>
+</header>
+
+<main>
+
+  <section class="card">
+    <h2><span class="nr">1</span> Wer schreibt?</h2>
+    <p class="hint">Die Person entscheidet über Schreibstil, Vorlage und Dateinamen des Rapports.</p>
+    <div class="people" id="people">
+      <button class="person" type="button" data-person="vlad" aria-pressed="false">
+        <strong>Vlad</strong><span>Firmware, Webseite, Dossier</span>
+      </button>
+      <button class="person" type="button" data-person="dorian" aria-pressed="false">
+        <strong>Dorian</strong><span>Töne, Spielmodi, Anleitung</span>
+      </button>
+    </div>
+    <div class="row">
+      <div>
+        <label for="datum">Datum der Lektion</label>
+        <input type="date" id="datum">
+      </div>
+      <div>
+        <label for="start">Lektionsbeginn (optional)</label>
+        <input type="time" id="start">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="nr">2</span> Infos von Frau Stalder</h2>
+    <p class="hint">Rohnotizen genügen — eine Info pro Zeile, Stichworte sind okay. Die Sätze werden später
+      im Stil der Person neu formuliert und neu geordnet.</p>
+    <textarea id="infos" rows="6" placeholder="Abmeldung bis Freitag 12 Uhr
+Fotos für Dokumappe
+MSG-Notenblatt zeigt offene Punkte"></textarea>
+  </section>
+
+  <section class="card" id="lektionen">
+    <h2><span class="nr">3</span> Die drei Lektionen</h2>
+    <p class="hint">Was wurde gemacht, mit Zahlen? Frau Stalder verlangt <strong>mindestens 4 Sätze</strong> pro Lektion.
+      Zu jeder Lektion gehört ein eigenes Foto vom Arbeitsprozess — Handyfoto, kein Bildschirmfoto.</p>
+    <!-- Lektionen werden per JS eingefügt -->
+  </section>
+
+  <section class="card">
+    <h2><span class="nr">4</span> Auswertung</h2>
+    <p class="hint">Kurze Stichpunkte, eine Zeile pro Punkt. «Gelernt» ist freiwillig.</p>
+
+    <label for="positives">Positives</label>
+    <textarea id="positives" rows="3" placeholder="Firmware läuft auf beiden Testgeräten"></textarea>
+
+    <label for="negatives">Negatives</label>
+    <textarea id="negatives" rows="3" placeholder="Zu wenig Zeit für das Gehäuse"></textarea>
+
+    <label for="gelernt">Das habe ich gelernt (optional)</label>
+    <textarea id="gelernt" rows="3" placeholder="ESP-NOW braucht keine Verbindung, um Geräte zu finden"></textarea>
+
+    <label for="naechste_woche">Meine Arbeit auf die nächste Woche</label>
+    <textarea id="naechste_woche" rows="3" placeholder="Gehäuse v2 drucken und Fit-Test machen"></textarea>
+
+    <details>
+      <summary>Was passiert nach dem Download?</summary>
+      <ol>
+        <li>Die <code>.zip</code>-Datei im Discord an Hermes schicken (oder in den Projektordner legen).</li>
+        <li>Der Rapport wird gebaut: eigene Vorlage, eigener Stil, Infos neu formuliert.</li>
+        <li>Du bekommst den fertigen <code>.docx</code> zurück — prüfen, dann via Teams an Frau Stalder.</li>
+      </ol>
+    </details>
+  </section>
+
+</main>
+
+<div class="bar">
+  <div class="check" id="check">Noch nichts eingegeben.</div>
+  <button class="ghost" id="reset" type="button">Entwurf leeren</button>
+  <button class="primary" id="download" type="button">Download .zip</button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="zip.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
