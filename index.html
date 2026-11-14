@@ -7,6 +7,15 @@
 <meta name="description" content="Tracky hält fest, was in der PU-Lektion gelaufen ist, und lädt einen Rapport-Export als .zip herunter.">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+<script>
+  /* Thema vor dem ersten Zeichnen setzen, damit nichts hell aufblitzt */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem("tracky.theme"); } catch (e) {}
+    if (!t) t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", t);
+  })();
+</script>
 </head>
 <body>
 
@@ -16,6 +25,7 @@
     <span class="tag">PU · Gruppe 22</span>
   </div>
   <div class="spacer"></div>
+  <button class="theme-toggle" id="theme" type="button" title="Hell / Dunkel" aria-label="Hell / Dunkel umschalten">🌙</button>
   <span class="status" id="status"></span>
 </header>
 

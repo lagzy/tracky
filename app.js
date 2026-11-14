@@ -98,6 +98,30 @@
     toast._t = setTimeout(function () { el.toast.classList.remove("show"); }, ms || 2600);
   }
 
+  function setzeThema(dunkel, merken) {
+    var thema = dunkel ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", thema);
+    var b = document.getElementById("theme");
+    if (b) {
+      b.textContent = dunkel ? "☀️" : "🌙";
+      b.setAttribute("aria-pressed", String(dunkel));
+      b.title = dunkel ? "Zu hell wechseln" : "Zu dunkel wechseln";
+    }
+    if (merken) {
+      try { localStorage.setItem("tracky.theme", thema); } catch (e) {}
+    }
+  }
+
+  function themaBinden() {
+    var b = document.getElementById("theme");
+    var aktuell = document.documentElement.getAttribute("data-theme") === "dark";
+    setzeThema(aktuell, false);
+    if (!b) return;
+    b.addEventListener("click", function () {
+      setzeThema(document.documentElement.getAttribute("data-theme") !== "dark", true);
+    });
+  }
+
   function meldeStatus(text, ok) {
     el.status.textContent = text;
     el.status.className = "status" + (ok ? " saved" : "");
@@ -367,6 +391,7 @@
       b.addEventListener("click", function () { setzePerson(b.dataset.person); });
     });
 
+    themaBinden();
     bindeFeld(el.positives, "positives");
     bindeFeld(el.negatives, "negatives");
     bindeFeld(el.gelernt, "gelernt");

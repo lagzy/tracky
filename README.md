@@ -25,6 +25,9 @@ Der Entwurf wird laufend lokal im Browser gespeichert (IndexedDB). Es gibt keine
 Server, kein Konto und keine Übertragung: Hochgeladen wird nur, was man selbst
 per Discord weitergibt.
 
+Oben rechts schaltet der Mond-/Sonnen-Knopf zwischen hellem und dunklem Design um; die
+Wahl bleibt im Browser gespeichert. Ohne Wahl folgt die Seite der Systemeinstellung.
+
 ## Dateien
 
 | Datei | Zweck |
