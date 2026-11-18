@@ -5,8 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Tracky — PU-Lektion festhalten</title>
 <meta name="description" content="Tracky hält fest, was in der PU-Lektion gelaufen ist, und lädt einen Rapport-Export als .zip herunter.">
-<link rel="stylesheet" href="style.css?v=3">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
+<meta name="theme-color" content="#0A0A0C">
+<link rel="stylesheet" href="style.css?v=6">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%230A0A0C'/><rect x='4' y='4' width='8' height='2' fill='%237BFFB2'/><rect x='4' y='8' width='2' height='4' fill='%237BFFB2'/></svg>">
 <script>
   /* Thema vor dem ersten Zeichnen setzen, damit nichts hell aufblitzt */
   (function () {
@@ -22,18 +23,21 @@
 
 <header>
   <div class="brand">
-    <h1>Tracky</h1>
-    <span class="tag">PU · Gruppe 22</span>
+    <img class="pip" src="pip.png" width="32" height="32" alt="">
+    <div class="brand-text">
+      <h1>Tracky</h1>
+      <span class="tag">PU · Gruppe 22</span>
+    </div>
   </div>
   <div class="spacer"></div>
-  <button class="theme-toggle" id="theme" type="button" title="Hell / Dunkel" aria-label="Hell / Dunkel umschalten">🌙</button>
+  <button class="theme-toggle" id="theme" type="button" title="Hell / Dunkel" aria-label="Hell / Dunkel umschalten">Nacht</button>
   <span class="status" id="status"></span>
 </header>
 
 <main>
 
   <section class="card">
-    <h2><span class="nr">1</span> Wer schreibt?</h2>
+    <h2><span class="nr">01</span> Wer schreibt?</h2>
     <p class="hint">Die Person entscheidet über Schreibstil, Vorlage und Dateinamen des Rapports.</p>
     <div class="people" id="people">
       <button class="person" type="button" data-person="vlad" aria-pressed="false">
@@ -56,7 +60,7 @@
   </section>
 
   <section class="card" id="lektionen">
-    <h2><span class="nr">2</span> Die drei Lektionen</h2>
+    <h2><span class="nr">02</span> Die drei Lektionen</h2>
     <p class="hint">Nur Stichpunkte: <em>«Firmware weitergebracht, neuer Spielmodus angefangen»</em>.
       Den Rapporttext schreibe ich daraus — du musst keine Sätze formulieren.
       Ein Foto pro Lektion genügt (Handyfoto, kein Bildschirmfoto).</p>
@@ -64,7 +68,7 @@
   </section>
 
   <section class="card">
-    <h2><span class="nr">3</span> Auswertung <span class="frei">optional</span></h2>
+    <h2><span class="nr">03</span> Auswertung <span class="frei">optional</span></h2>
     <p class="hint">Leer lassen ist in Ordnung — dann schreibe ich Positives, Negatives und «gelernt»
       aus den Lektionen. Eigene Stichpunkte haben Vorrang.</p>
 
@@ -108,6 +112,6 @@
 <div class="toast" id="toast"></div>
 
 <script src="zip.js?v=3"></script>
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>

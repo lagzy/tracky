@@ -103,7 +103,7 @@
     document.documentElement.setAttribute("data-theme", thema);
     var b = document.getElementById("theme");
     if (b) {
-      b.textContent = dunkel ? "☀️" : "🌙";
+      b.textContent = dunkel ? "Nacht" : "Tag";  /* Wort statt Symbol: Designsystem-Regel */
       b.setAttribute("aria-pressed", String(dunkel));
       b.title = dunkel ? "Zu hell wechseln" : "Zu dunkel wechseln";
     }
@@ -230,7 +230,7 @@
           ["Firmware weitergebracht, neuer Spielmodus angefangen",
            "Abstandston getestet, Werte notiert",
            "Töne für Zombie abgestimmt"][li] + '"></textarea>' +
-          '<label class="drop">📷 Foto hinzufügen oder hierher ziehen<input type="file" accept="image/*" multiple></label>' +
+          '<label class="drop">Foto hinzufügen oder hierher ziehen<input type="file" accept="image/*" multiple></label>' +
           '<div class="thumbs"></div>';
 
         var textarea = h.querySelector("textarea");
